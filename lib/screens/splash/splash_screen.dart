@@ -27,9 +27,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future.delayed(const Duration(seconds: 1), () {
       if (isEnteredBefore) {
-        Navigator.pushNamed(context, RouteNames.tabBox);
+        Navigator.pushReplacementNamed(context, RouteNames.tabBox);
       } else {
-        Navigator.pushNamed(context, RouteNames.onBoarding);
+        Navigator.pushReplacementNamed(context, RouteNames.onBoarding);
       }
 
 

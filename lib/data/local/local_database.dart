@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'package:path/path.dart';
+import 'package:to_do_my/data/local/category/category_model.dart';
+import 'package:to_do_my/data/local/category/category_model_constants.dart';
 import 'package:to_do_my/data/local/taskmodel_constants.dart';
 
 import '../task_model.dart';
@@ -53,7 +55,6 @@ class LocalDatabase {
     const idType = "INTEGER PRIMARY KEY AUTOINCREMENT";
     const textType = "TEXT NOT NULL";
     const intType = "INTEGER DEFAULT 0";
-
     await db.execute('''CREATE TABLE ${TaskModelConstants.tableName}(
     
     ${TaskModelConstants.id} $idType,
@@ -64,15 +65,77 @@ class LocalDatabase {
       ${TaskModelConstants.category} $textType,
       ${TaskModelConstants.priority} $intType
      )''');
+
+
+
+
+    await db.execute('''CREATE TABLE ${CategoryModelConstants.tableName}(
+      ${CategoryModelConstants.id} $idType,
+      ${CategoryModelConstants.name} $textType,
+      ${CategoryModelConstants.color} $textType,
+      ${CategoryModelConstants.iconPath} $textType
+      )''');
+
+
   }
 
+
+  static Future<CategoryModel> insertCategory(CategoryModel categoryModel) async {
+
+    final db = await databaseInstance.database;
+    int savedCategoryID =
+    await db.insert(CategoryModelConstants.tableName, categoryModel.toJson());
+
+debugPrint("Category ID ${(savedCategoryID.toString())}");
+    return categoryModel.copyWith(id: savedCategoryID);
+
+  }
+
+  static Future<List<CategoryModel>> getAllCategory() async {
+    final db = await databaseInstance.database;
+    String orderBy = "${CategoryModelConstants.id} DESC";
+    List json = await db.query(CategoryModelConstants.tableName, orderBy: orderBy);
+
+    return json.map((e) => CategoryModel.fromJson(e)).toList();
+  }
+
+  static Future<int> deleteCategory(int id) async {
+    final db = await databaseInstance.database;
+
+    int deletedId = await db.delete(
+      CategoryModelConstants.tableName,
+      where: "${CategoryModelConstants.id}=?",
+      whereArgs: [id],
+    );
+    return deletedId;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  ////////////-----------------Tasks
+
   static Future<TaskModel> insertTask(TaskModel taskModel) async {
-    debugPrint("INTIAL ID: ${taskModel.id}");
 
     final db = await databaseInstance.database;
     int savedTaskID =
     await db.insert(TaskModelConstants.tableName, taskModel.toJson());
-    debugPrint("saved  ID: ${savedTaskID}");
 
     return taskModel.copyWith(id: savedTaskID);
   }

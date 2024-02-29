@@ -56,7 +56,9 @@ addTaskDialog({
                       fontSize: 20, color: AppColors.white.withOpacity(.87)),
                 ),
                 TextField(
+
                   maxLines: null,
+
 
 
                   textInputAction: TextInputAction.next,

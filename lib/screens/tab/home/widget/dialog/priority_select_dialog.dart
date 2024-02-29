@@ -5,7 +5,7 @@ import 'package:to_do_my/utils/images/app_images.dart';
 import 'package:to_do_my/utils/styles/app_text_style.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
-import '../../../../../data/category.dart';
+import '../../../../../data/my_category.dart';
 import '../../../../../utils/colors/app_colors.dart';
 import '../../../../../utils/size/size_utils.dart';
 
@@ -35,7 +35,7 @@ showPrioritySelectDialog({
                 Expanded(
                   child: GridView.count(
                     crossAxisCount: 4,
-                    children: List.generate(categories.length, (index) {
+                    children: List.generate(priorities.length, (index) {
                       return Column(
                         children: [
                           ZoomTapAnimation(
@@ -104,3 +104,5 @@ showPrioritySelectDialog({
     },
   );
 }
+
+List<int> priorities=[1,2,3,4,5,6,7,8,9,10];

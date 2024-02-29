@@ -31,6 +31,7 @@ class AppImages {
   static const String movie = "assets/icons/movie.svg";
   static const String homes = "assets/icons/homes.svg";
   static const String create_new = "assets/icons/create_new.svg";
+  static const String search = "assets/icons/search.svg";
 
 
 //.jpg
