@@ -170,7 +170,7 @@ class _AddCategoryScreenState extends State<AddCategoryScreen> {
                                             Icons.check,
                                             color: Colors.green,
                                           )
-                                        : Text(" "),
+                                        : Text("  "),
                                   ],
                                 )),
                           ],
